@@ -3,6 +3,11 @@ name = "flexpect"
 version = "0.0.1"
 edition = "2018"
 license = "MIT OR Apache-2.0"
+description = "Attribute macro that falls back to #[allow] if #[expect] is not supported"
+readme = "README.md"
+repository = "https://github.com/rusticstuff/flexpect"
+homepage = "https://github.com/rusticstuff/flexpect"
+keywords = [ "expect", "lint", "macro", "clippy", "warnings"]
 
 [lib]
 proc-macro = true
