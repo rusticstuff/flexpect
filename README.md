@@ -1,3 +1,3 @@
 # flexpect
 
-tbd
+Work in progress.
