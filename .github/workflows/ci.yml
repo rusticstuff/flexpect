@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "17 3 * * *"
+
+env:
+  CARGO_TERM_COLOR: always
+  INLINE_IGNORE_PATTERN: "drop_in_place|::fmt::"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        toolchain:
+          [
+            "1.38.0",
+            "1.42.0",
+            "1.43.0",
+            "1.80.0",
+            "1.81.0",
+            "stable",
+            "beta",
+            "nightly",
+          ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.toolchain }}
+      - name: cargo test
+        run: cargo test --all-targets
+        env:
+          RUSTFLAGS: "-D warnings"
+      - name: cargo clean
+        run: cargo clean
+      - name: cargo clippy
+        run: cargo clippy --all-targets
+        env:
+          RUSTFLAGS: "-D warnings"
