@@ -1,4 +1,3 @@
-    Checking flexpect v0.0.1 (/Users/hans/dev/flexpect)
 warning: this lint expectation is unfulfilled
   --> tests/simple.rs:14:20
    |
