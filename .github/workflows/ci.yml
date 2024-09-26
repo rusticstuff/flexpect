@@ -26,40 +26,16 @@ jobs:
         with:
           toolchain: ${{ matrix.toolchain }}
           components: clippy
-      - name: cargo check --all-targets
-        shell: bash
-        run: |
-          output=$(cargo check --all-targets 2>&1)
-          echo "$output" > check_output.txt
-          if ! diff -u tests/check-expect-supported.out check_output.txt; then
-            echo "Cargo check output does not match expected output"
-            exit 1
-          fi
-      - name: cargo clean
-        run: cargo clean
-      - name: cargo test
-        run: cargo test --all-targets
-      - name: cargo clean
-        run: cargo clean
-      - name: cargo clippy
-        shell: bash
-        run: |
-          output=$(cargo clippy --all-targets 2>&1)
-          echo "$output" > clippy_output.txt
-          if ! diff -u tests/clippy-expect-supported.out clippy_output.txt; then
-            echo "Cargo clippy output does not match expected output"
-            exit 1
-          fi
       - name: Run cargo check comparison
         run: ./tests/compare-output.sh "check" "tests/check-expect-supported.out"
       - name: cargo clean
         run: cargo clean
-      - name: cargo test
-        run: cargo test --all-targets
+      - name: Run cargo clippy comparison
+        run: ./tests/compare-output.sh "clippy" "tests/check-expect-supported.out"
       - name: cargo clean
         run: cargo clean
-      - name: Run cargo clippy comparison
-        run: ./tests/compare-output.sh "clippy" "tests/clippy-expect-supported.out"
+      - name: cargo test
+        run: cargo test --all-targets
   allow:
     runs-on: ubuntu-latest
     strategy:
@@ -78,9 +54,9 @@ jobs:
         run: cargo check --all-targets
       - name: cargo clean
         run: cargo clean
-      - name: cargo test
-        run: cargo test --all-targets
-      - name: cargo clean
-        run: cargo clean
       - name: cargo clippy
         run: cargo clippy --all-targets
+      - name: cargo clean
+        run: cargo clean
+      - name: cargo test
+        run: cargo test --all-targets

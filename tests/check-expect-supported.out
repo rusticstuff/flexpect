@@ -12,6 +12,3 @@ warning: this lint expectation is unfulfilled
    |
 34 | #[flexpect::expect(unused_variables, clippy::clone_on_copy)]
    |                    ^^^^^^^^^^^^^^^^
-
-warning: `flexpect` (test "simple") generated 2 warnings
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.06s
