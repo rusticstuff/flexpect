@@ -17,17 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        toolchain:
-          [
-            "1.38.0",
-            "1.42.0",
-            "1.43.0",
-            "1.80.0",
-            "1.81.0",
-            "stable",
-            "beta",
-            "nightly",
-          ]
+        toolchain: ["1.81.0", "stable", "beta", "nightly"]
     env:
       CARGO_NET_GIT_FETCH_WITH_CLI: "true"
     steps:
