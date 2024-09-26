@@ -8,10 +8,6 @@ on:
   schedule:
     - cron: "17 3 * * *"
 
-env:
-  CARGO_TERM_COLOR: always
-  INLINE_IGNORE_PATTERN: "drop_in_place|::fmt::"
-
 jobs:
   expect:
     runs-on: ubuntu-latest
