@@ -27,7 +27,7 @@ jobs:
       - name: cargo clean
         run: cargo clean
       - name: Run cargo clippy comparison
-        run: ./tests/compare-output.sh "clippy" "tests/check-expect-supported.out"
+        run: ./tests/compare-output.sh "clippy" "tests/clippy-expect-supported.out"
       - name: cargo clean
         run: cargo clean
       - name: cargo test
