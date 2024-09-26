@@ -32,11 +32,32 @@ jobs:
         run: cargo clean
       - name: cargo test
         run: cargo test --all-targets
-  allow:
+  allow-check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         toolchain: ["1.43.0", "1.80.0"]
+    env:
+      RUSTFLAGS: "-D warnings"
+      CARGO_NET_GIT_FETCH_WITH_CLI: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          components: clippy
+      - name: cargo check
+        run: cargo check --all-targets
+      - name: cargo clean
+        run: cargo clean
+      - name: cargo test
+        run: cargo test --all-targets
+
+  allow-clippy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        toolchain: ["1.64.0", "1.80.0"] # rustversion only works with clippy >= 1.64.0
     env:
       RUSTFLAGS: "-D warnings"
       CARGO_NET_GIT_FETCH_WITH_CLI: "true"
