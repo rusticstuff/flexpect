@@ -32,6 +32,7 @@ jobs:
         run: cargo clean
       - name: cargo test
         run: cargo test --all-targets
+
   allow-check:
     runs-on: ubuntu-latest
     strategy:
@@ -45,7 +46,6 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.toolchain }}
-          components: clippy
       - name: cargo check
         run: cargo check --all-targets
       - name: cargo clean
