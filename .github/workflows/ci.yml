@@ -23,11 +23,11 @@ jobs:
           toolchain: ${{ matrix.toolchain }}
           components: clippy
       - name: Run cargo check comparison
-        run: ./tests/compare-output.sh "check" "tests/check-expect-supported.out"
+        run: ./tests/compare-output.sh "check --all-features" "tests/check-expect-supported.out"
       - name: cargo clean
         run: cargo clean
       - name: Run cargo clippy comparison
-        run: ./tests/compare-output.sh "clippy" "tests/clippy-expect-supported.out"
+        run: ./tests/compare-output.sh "clippy --all-features" "tests/clippy-expect-supported.out"
       - name: cargo clean
         run: cargo clean
       - name: cargo test
@@ -47,17 +47,17 @@ jobs:
         with:
           toolchain: ${{ matrix.toolchain }}
       - name: cargo check
-        run: cargo check --all-targets
+        run: cargo check --all-targets --all-features
       - name: cargo clean
         run: cargo clean
       - name: cargo test
-        run: cargo test --all-targets
+        run: cargo test --all-targets --all-features
 
   allow-clippy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        toolchain: ["1.64.0", "1.80.0"] # rustversion only works with clippy >= 1.64.0
+        toolchain: ["1.64.0", "1.80.0"] # clippy+rustversion only works with clippy >= 1.64.0
     env:
       RUSTFLAGS: "-D warnings"
       CARGO_NET_GIT_FETCH_WITH_CLI: "true"
@@ -68,11 +68,31 @@ jobs:
           toolchain: ${{ matrix.toolchain }}
           components: clippy
       - name: cargo check
-        run: cargo check --all-targets
+        run: cargo check --all-targets --all-features
       - name: cargo clean
         run: cargo clean
       - name: cargo clippy
-        run: cargo clippy --all-targets
+        run: cargo clippy --all-targets --all-features
+      - name: cargo clean
+        run: cargo clean
+      - name: cargo test
+        run: cargo test --all-targets --all-features
+
+  ignore-check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        toolchain: ["1.38.0", "1.42.0"]
+    env:
+      RUSTFLAGS: "-D warnings"
+      CARGO_NET_GIT_FETCH_WITH_CLI: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.toolchain }}
+      - name: cargo check
+        run: cargo check --all-targets
       - name: cargo clean
         run: cargo clean
       - name: cargo test
