@@ -5,4 +5,3 @@ warning: unused variable: `x`
   |         ^ help: consider prefixing with an underscore: `_x`
   |
   = note: `#[warn(unused_variables)]` on by default
-
