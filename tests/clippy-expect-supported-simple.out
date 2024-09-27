@@ -1,13 +1,13 @@
 warning: this lint expectation is unfulfilled
-  --> tests/simple.rs:14:20
+  --> tests/simple.rs:14:22
    |
 14 | #[flexpect::flexpect(unused_variables)]
-   |                    ^^^^^^^^^^^^^^^^
+   |                      ^^^^^^^^^^^^^^^^
    |
    = note: `#[warn(unfulfilled_lint_expectations)]` on by default
 
 warning: this lint expectation is unfulfilled
-  --> tests/simple.rs:17:20
+  --> tests/simple.rs:17:22
    |
 17 | #[flexpect::flexpect(clippy::clone_on_copy)]
-   |                    ^^^^^^^^^^^^^^^^^^^^^
+   |                      ^^^^^^^^^^^^^^^^^^^^^
