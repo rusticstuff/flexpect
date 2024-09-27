@@ -30,6 +30,7 @@ pub fn expect(
     replace_attr_name_with(attr, item, "expect")
 }
 
+#[rustversion::any(since(1.43.0), all(nightly, since(2020-02-27)))]
 fn replace_attr_name_with(
     attr: proc_macro::TokenStream,
     item: proc_macro::TokenStream,
