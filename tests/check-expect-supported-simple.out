@@ -5,4 +5,3 @@ warning: this lint expectation is unfulfilled
    |                    ^^^^^^^^^^^^^^^^
    |
    = note: `#[warn(unfulfilled_lint_expectations)]` on by default
-

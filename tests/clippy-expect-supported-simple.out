@@ -11,4 +11,3 @@ warning: this lint expectation is unfulfilled
    |
 17 | #[flexpect::expect(clippy::clone_on_copy)]
    |                    ^^^^^^^^^^^^^^^^^^^^^
-
