@@ -23,6 +23,10 @@ jobs:
           toolchain: ${{ matrix.toolchain }}
           components: clippy
       # Run two tests to ensure that the output is consistent
+      - name: clippy on just the library should have no warnings
+        run: cargo clippy --all-features --lib
+        env:
+          RUSTFLAGS: "-D warnings"
       - name: Run cargo check simple comparison
         run: ./tests/compare-output.sh "check --all-features --test simple" "tests/check-expect-supported-simple.out"
       - name: Run cargo check submod comparison
@@ -47,6 +51,7 @@ jobs:
       RUSTFLAGS: "-D warnings"
       CARGO_NET_GIT_FETCH_WITH_CLI: "true"
     steps:
+      # clippy+rustversion only works with clippy >= 1.64.0
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
         with:

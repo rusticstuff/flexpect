@@ -1,6 +1,6 @@
 #![cfg(feature = "submodtests")]
 
-#[flexpect::expect(unused_variables, clippy::clone_on_copy)]
+#[flexpect::flexpect(unused_variables, clippy::clone_on_copy)]
 mod submod_correct {
     #[test]
     fn compiler_warning_correctly_flexpected() {
@@ -13,7 +13,7 @@ mod submod_correct {
     }
 }
 
-#[flexpect::expect(unused_variables, clippy::clone_on_copy)]
+#[flexpect::flexpect(unused_variables, clippy::clone_on_copy)]
 mod submod_incorrect {
     #[test]
     fn compiler_warning_incorrectly_flexpected() {}

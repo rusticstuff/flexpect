@@ -4,20 +4,20 @@ use proc_macro::TokenStream;
 
 #[rustversion::any(before(1.43.0))]
 #[proc_macro_attribute]
-pub fn expect(_attr: TokenStream, item: TokenStream) -> TokenStream {
+pub fn flexpect(_attr: TokenStream, item: TokenStream) -> TokenStream {
     // using #[allow(...)] does not work before 1.43.0 due to a bug
     item
 }
 
 #[rustversion::all(since(1.43.0), before(1.81))]
 #[proc_macro_attribute]
-pub fn expect(attr: TokenStream, item: TokenStream) -> TokenStream {
+pub fn flexpect(attr: TokenStream, item: TokenStream) -> TokenStream {
     replace_attr_with(attr, item, "allow")
 }
 
 #[rustversion::since(1.81)]
 #[proc_macro_attribute]
-pub fn expect(attr: TokenStream, item: TokenStream) -> TokenStream {
+pub fn flexpect(attr: TokenStream, item: TokenStream) -> TokenStream {
     replace_attr_with(attr, item, "expect")
 }
 
