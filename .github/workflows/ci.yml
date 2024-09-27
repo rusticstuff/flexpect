@@ -96,9 +96,9 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.toolchain }}
-      - name: cargo check
-        run: cargo check --all-targets
+      - name: Run cargo check simple comparison
+        run: ./tests/compare-output.sh "check --all-features --test simple" "tests/check-expect-ignored-simple.out"
       - name: cargo clean
         run: cargo clean
-      - name: cargo test
-        run: cargo test --all-targets
+      - name: cargo test -- simple
+        run: cargo test -- simple

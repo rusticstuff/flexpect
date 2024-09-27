@@ -1,0 +1,8 @@
+warning: unused variable: `x`
+ --> tests/simple.rs:4:9
+  |
+4 |     let x = 1;
+  |         ^ help: consider prefixing with an underscore: `_x`
+  |
+  = note: `#[warn(unused_variables)]` on by default
+
