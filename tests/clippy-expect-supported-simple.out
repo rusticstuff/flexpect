@@ -23,4 +23,3 @@ warning: this lint expectation is unfulfilled
    |
 34 | #[flexpect::expect(unused_variables, clippy::clone_on_copy)]
    |                                      ^^^^^^^^^^^^^^^^^^^^^
-
