@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 
 command=$1
 expected_file=$2
