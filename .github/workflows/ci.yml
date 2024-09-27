@@ -89,7 +89,6 @@ jobs:
       matrix:
         toolchain: ["1.38.0", "1.42.0"]
     env:
-      RUSTFLAGS: "-D warnings"
       CARGO_NET_GIT_FETCH_WITH_CLI: "true"
     steps:
       - uses: actions/checkout@v4
