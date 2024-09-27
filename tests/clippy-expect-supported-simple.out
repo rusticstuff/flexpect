@@ -11,15 +11,3 @@ warning: this lint expectation is unfulfilled
    |
 17 | #[flexpect::expect(clippy::clone_on_copy)]
    |                    ^^^^^^^^^^^^^^^^^^^^^
-
-warning: this lint expectation is unfulfilled
-  --> tests/simple.rs:34:20
-   |
-34 | #[flexpect::expect(unused_variables, clippy::clone_on_copy)]
-   |                    ^^^^^^^^^^^^^^^^
-
-warning: this lint expectation is unfulfilled
-  --> tests/simple.rs:34:38
-   |
-34 | #[flexpect::expect(unused_variables, clippy::clone_on_copy)]
-   |                                      ^^^^^^^^^^^^^^^^^^^^^
