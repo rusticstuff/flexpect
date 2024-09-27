@@ -1,7 +1,7 @@
 warning: this lint expectation is unfulfilled
   --> tests/simple.rs:14:20
    |
-14 | #[flexpect::expect(unused_variables)]
+14 | #[flexpect::flexpect(unused_variables)]
    |                    ^^^^^^^^^^^^^^^^
    |
    = note: `#[warn(unfulfilled_lint_expectations)]` on by default
