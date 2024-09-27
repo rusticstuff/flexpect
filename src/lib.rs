@@ -1,42 +1,29 @@
 extern crate proc_macro;
 
-#[rustversion::any(before(1.43.0), all(nightly, before(2020-02-27)))]
+use proc_macro::TokenStream;
+
+#[rustversion::any(before(1.43.0))]
 #[proc_macro_attribute]
-pub fn expect(
-    _attr: proc_macro::TokenStream,
-    item: proc_macro::TokenStream,
-) -> proc_macro::TokenStream {
+pub fn expect(_attr: TokenStream, item: TokenStream) -> TokenStream {
     // using #[allow(...)] does not work before 1.43.0 due to a bug
     item
 }
 
-#[rustversion::all(
-    any(since(1.43.0), all(nightly, since(2020-02-27))),
-    any(before(1.81), all(nightly, before(2024-06-27))))]
+#[rustversion::all(since(1.43.0), before(1.81))]
 #[proc_macro_attribute]
-pub fn expect(
-    attr: proc_macro::TokenStream,
-    item: proc_macro::TokenStream,
-) -> proc_macro::TokenStream {
-    replace_attr_name_with(attr, item, "allow")
+pub fn expect(attr: TokenStream, item: TokenStream) -> TokenStream {
+    replace_attr_with(attr, item, "allow")
 }
 
-#[rustversion::any(since(1.81), all(nightly, since(2024-06-27)))]
+#[rustversion::since(1.81)]
 #[proc_macro_attribute]
-pub fn expect(
-    attr: proc_macro::TokenStream,
-    item: proc_macro::TokenStream,
-) -> proc_macro::TokenStream {
-    replace_attr_name_with(attr, item, "expect")
+pub fn expect(attr: TokenStream, item: TokenStream) -> TokenStream {
+    replace_attr_with(attr, item, "expect")
 }
 
-#[rustversion::any(since(1.43.0), all(nightly, since(2020-02-27)))]
-fn replace_attr_name_with(
-    attr: proc_macro::TokenStream,
-    item: proc_macro::TokenStream,
-    allow_or_expect: &str,
-) -> proc_macro::TokenStream {
-    use proc_macro::{Delimiter, Group, Ident, Punct, Spacing, Span, TokenStream, TokenTree};
+#[rustversion::since(1.43.0)]
+fn replace_attr_with(attr: TokenStream, item: TokenStream, allow_or_expect: &str) -> TokenStream {
+    use proc_macro::{Delimiter, Group, Ident, Punct, Spacing, Span, TokenTree};
     use std::iter::once;
     let mut s = TokenStream::new();
     s.extend(once(TokenTree::from(Punct::new('#', Spacing::Alone))));
