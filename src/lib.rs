@@ -12,21 +12,17 @@ pub fn expect(_attr: TokenStream, item: TokenStream) -> TokenStream {
 #[rustversion::all(since(1.43.0), before(1.81))]
 #[proc_macro_attribute]
 pub fn expect(attr: TokenStream, item: TokenStream) -> TokenStream {
-    replace_attr_name_with(attr, item, "allow")
+    replace_attr_with(attr, item, "allow")
 }
 
 #[rustversion::since(1.81)]
 #[proc_macro_attribute]
 pub fn expect(attr: TokenStream, item: TokenStream) -> TokenStream {
-    replace_attr_name_with(attr, item, "expect")
+    replace_attr_with(attr, item, "expect")
 }
 
 #[rustversion::since(1.43.0)]
-fn replace_attr_name_with(
-    attr: TokenStream,
-    item: TokenStream,
-    allow_or_expect: &str,
-) -> TokenStream {
+fn replace_attr_with(attr: TokenStream, item: TokenStream, allow_or_expect: &str) -> TokenStream {
     use proc_macro::{Delimiter, Group, Ident, Punct, Spacing, Span, TokenTree};
     use std::iter::once;
     let mut s = TokenStream::new();
