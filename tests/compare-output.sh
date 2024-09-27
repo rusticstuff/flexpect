@@ -1,5 +1,6 @@
 #!/bin/bash
 set -euo pipefail
+
 command=$1
 expected_file=$2
 output=$(cargo ${command} --color=never --quiet 2>&1)
