@@ -22,12 +22,17 @@ jobs:
         with:
           toolchain: ${{ matrix.toolchain }}
           components: clippy
-      - name: Run cargo check comparison
-        run: ./tests/compare-output.sh "check --all-features" "tests/check-expect-supported.out"
+      # Run two tests to ensure that the output is consistent
+      - name: Run cargo check simple comparison
+        run: ./tests/compare-output.sh "check --all-features --test simple" "tests/check-expect-supported-simple.out"
+      - name: Run cargo check submod comparison
+        run: ./tests/compare-output.sh "check --all-features --test submod" "tests/check-expect-supported-submod.out"
       - name: cargo clean
         run: cargo clean
-      - name: Run cargo clippy comparison
-        run: ./tests/compare-output.sh "clippy --all-features" "tests/clippy-expect-supported.out"
+      - name: Run cargo clippy simple comparison
+        run: ./tests/compare-output.sh "clippy --all-features --test simple" "tests/clippy-expect-supported-simple.out"
+      - name: Run cargo clippy submod comparison
+        run: ./tests/compare-output.sh "clippy --all-features --test submod" "tests/clippy-expect-supported-submod.out"
       - name: cargo clean
         run: cargo clean
       - name: cargo test

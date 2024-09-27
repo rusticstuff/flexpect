@@ -1,0 +1,14 @@
+warning: this lint expectation is unfulfilled
+  --> tests/submod.rs:16:20
+   |
+16 | #[flexpect::expect(unused_variables, clippy::clone_on_copy)]
+   |                    ^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unfulfilled_lint_expectations)]` on by default
+
+warning: this lint expectation is unfulfilled
+  --> tests/submod.rs:16:38
+   |
+16 | #[flexpect::expect(unused_variables, clippy::clone_on_copy)]
+   |                                      ^^^^^^^^^^^^^^^^^^^^^
+
