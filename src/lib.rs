@@ -21,6 +21,25 @@ pub fn flexpect(attr: TokenStream, item: TokenStream) -> TokenStream {
     replace_attr_with(attr, item, "expect")
 }
 
+#[rustversion::any(before(1.43.0))]
+#[proc_macro_attribute]
+pub fn e(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    // using #[allow(...)] does not work before 1.43.0 due to a bug
+    item
+}
+
+#[rustversion::all(since(1.43.0), before(1.81))]
+#[proc_macro_attribute]
+pub fn e(attr: TokenStream, item: TokenStream) -> TokenStream {
+    replace_attr_with(attr, item, "allow")
+}
+
+#[rustversion::since(1.81)]
+#[proc_macro_attribute]
+pub fn e(attr: TokenStream, item: TokenStream) -> TokenStream {
+    replace_attr_with(attr, item, "expect")
+}
+
 #[rustversion::since(1.43.0)]
 fn replace_attr_with(attr: TokenStream, item: TokenStream, allow_or_expect: &str) -> TokenStream {
     use proc_macro::{Delimiter, Group, Ident, Punct, Spacing, Span, TokenTree};
