@@ -17,3 +17,4 @@ rustversion = "1.0.17"
 
 [features]
 submodtests = [] # internal feature for testing
+invalidtests = [] # internal feature for testing
