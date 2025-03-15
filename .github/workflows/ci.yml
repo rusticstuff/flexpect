@@ -28,15 +28,15 @@ jobs:
         env:
           RUSTFLAGS: "-D warnings"
       - name: Run cargo check simple comparison
-        run: ./tests/compare-output.sh "check --features submod --test simple" "tests/check-expect-supported-simple.out"
+        run: ./tests/compare-output.sh "check --features submodtests --test simple" "tests/check-expect-supported-simple.out"
       - name: Run cargo check submod comparison
-        run: ./tests/compare-output.sh "check --features submod --test submod" "tests/check-expect-supported-submod.out"
+        run: ./tests/compare-output.sh "check --features submodtests --test submod" "tests/check-expect-supported-submod.out"
       - name: cargo clean
         run: cargo clean
       - name: Run cargo clippy simple comparison
-        run: ./tests/compare-output.sh "clippy --features submod --test simple" "tests/clippy-expect-supported-simple.out"
+        run: ./tests/compare-output.sh "clippy --features submodtests --test simple" "tests/clippy-expect-supported-simple.out"
       - name: Run cargo clippy submod comparison
-        run: ./tests/compare-output.sh "clippy --features submod --test submod" "tests/clippy-expect-supported-submod.out"
+        run: ./tests/compare-output.sh "clippy --features submodtests --test submod" "tests/clippy-expect-supported-submod.out"
       - name: cargo clean
         run: cargo clean
       - name: cargo test
@@ -57,11 +57,11 @@ jobs:
         with:
           toolchain: ${{ matrix.toolchain }}
       - name: cargo check
-        run: cargo check --all-targets --features submod
+        run: cargo check --all-targets --features submodtests
       - name: cargo clean
         run: cargo clean
       - name: cargo test
-        run: cargo test --all-targets --features submod
+        run: cargo test --all-targets --features submodtests
 
   allow-clippy:
     runs-on: ubuntu-latest
@@ -78,15 +78,15 @@ jobs:
           toolchain: ${{ matrix.toolchain }}
           components: clippy
       - name: cargo check
-        run: cargo check --all-targets --features submod
+        run: cargo check --all-targets --features submodtests
       - name: cargo clean
         run: cargo clean
       - name: cargo clippy
-        run: cargo clippy --all-targets --features submod
+        run: cargo clippy --all-targets --features submodtests
       - name: cargo clean
         run: cargo clean
       - name: cargo test
-        run: cargo test --all-targets --features submod
+        run: cargo test --all-targets --features submodtests
 
   ignore-check:
     runs-on: ubuntu-latest
@@ -101,7 +101,7 @@ jobs:
         with:
           toolchain: ${{ matrix.toolchain }}
       - name: Run cargo check simple comparison
-        run: ./tests/compare-output.sh "check --features submod --test simple" "tests/check-expect-ignored-simple.out"
+        run: ./tests/compare-output.sh "check --features submodtests --test simple" "tests/check-expect-ignored-simple.out"
       - name: cargo clean
         run: cargo clean
       - name: cargo test -- simple
