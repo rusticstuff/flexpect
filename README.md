@@ -1,17 +1,10 @@
 # flexpect
 
-Using `#[flexpect::e(...)]` compiles to `#[expect(...)]` for newer versions of Rust and to `#[allow(...)]` when not supported.
+`#[flexpect::e(...)]` compiles to `#[expect(...)]` for newer versions of Rust and to `#[allow(...)]` when not supported.
 
 ## Purpose
 
-This crate allows you to get the benefits of `#[expect(...)]` while keeping your minimum supported Rust version to before 1.81.
-
-## Details
-`#[flexpect::e(...)]` comp
-- Version-dependent compilation of `#[flexpect::e(...)]`:
-  - Before Rust 1.43.0: No-op (due to a bug in earlier versions)
-  - Rust 1.43.0 to 1.80: Uses `#[allow(...)]`
-  - Rust 1.81 and later: Uses `#[expect(...)]`
+This crate enables getting the benefits of `#[expect(...)]` while maintaining a minimum supported Rust version that's earlier than 1.81.
 
 ## Usage
 
@@ -40,16 +33,14 @@ fn clippy_example() {
 }
 ```
 
-## Limitations
-
-flexpect does not work as inner attributes (`#![flexpect::e(...)]`) nor on statements, expressions or blocks due to compiler limitations.
-
 ## How it works
 
-- On Rust versions before 1.43.0, the attribute does nothing due to a bug in earlier versions.
+- On Rust versions before 1.43.0, the attribute translates to nothing due to a bug in earlier versions.
 - From Rust 1.43.0 to 1.80, it translates to `#[allow(...)]`.
 - From Rust 1.81 onwards, it translates to `#[expect(...)]`.
 
-This allows your code to compile without unexpected warnings across different Rust versions while still maintaining lint expectations in newer versions.
+The minimum supported Rust version is 1.38.
 
-The minimum supported Rust version is 1.38.0.
+## Limitations
+
+flexpect does not work as inner attributes (`#![flexpect::e(...)]`) nor on statements, expressions or blocks due to compiler limitations.
