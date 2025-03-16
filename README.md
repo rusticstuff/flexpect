@@ -17,7 +17,8 @@ flexpect = "0.1.0"
 Then use the `#[flexpect::e(...)]` or `#[flexpect::flexpect(...)]` attributes instead of `#[expect(...)]`:
 
 ```rust
-#[flexpect::e(unused_variables)] // instead of #[expect(unused_variables)]
+// instead of #[expect(unused_variables)]
+#[flexpect::e(unused_variables)]
 fn example() {
     let x = 1;
 }
@@ -26,7 +27,8 @@ fn example() {
 ```rust
 use flexpect::flexpect;
 
-#[flexpect(clippy::clone_on_copy)]  // instead of #[expect(clippy::clone_on_copy)]
+// instead of #[expect(clippy::clone_on_copy)]
+#[flexpect(clippy::clone_on_copy)]
 fn clippy_example() {
     let _ = 32.clone();
 }

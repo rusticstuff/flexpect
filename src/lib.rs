@@ -48,6 +48,16 @@ extern crate proc_macro;
 
 use proc_macro::TokenStream;
 
+/// `#[flexpect::e(...)]` compiles to `#[expect(...)]` for newer versions of Rust and to `#[allow(...)]` when not supported.
+///
+/// # Example
+///
+/// ```
+/// #[flexpect::e(clippy::clone_on_copy)]
+/// fn clippy_example() {
+///     let _ = 32.clone();
+/// }
+/// ```
 #[rustversion::any(before(1.43.0))]
 #[proc_macro_attribute]
 pub fn e(_attr_args: TokenStream, item: TokenStream) -> TokenStream {
@@ -55,18 +65,50 @@ pub fn e(_attr_args: TokenStream, item: TokenStream) -> TokenStream {
     item
 }
 
+/// `#[flexpect::e(...)]` compiles to `#[expect(...)]` for newer versions of Rust and to `#[allow(...)]` when not supported.
+///
+/// # Example
+///
+/// ```
+/// #[flexpect::e(clippy::clone_on_copy)]
+/// fn clippy_example() {
+///     let _ = 32.clone();
+/// }
+/// ```
 #[rustversion::all(since(1.43.0), before(1.81))]
 #[proc_macro_attribute]
 pub fn e(attr_args: TokenStream, item: TokenStream) -> TokenStream {
     create_attr("allow", attr_args, item)
 }
 
+/// `#[flexpect::e(...)]` compiles to `#[expect(...)]` for newer versions of Rust and to `#[allow(...)]` when not supported.
+///
+/// # Example
+///
+/// ```
+/// #[flexpect::e(clippy::clone_on_copy)]
+/// fn clippy_example() {
+///     let _ = 32.clone();
+/// }
+/// ```
 #[rustversion::since(1.81)]
 #[proc_macro_attribute]
 pub fn e(attr_args: TokenStream, item: TokenStream) -> TokenStream {
     create_attr("expect", attr_args, item)
 }
 
+/// `#[flexpect(...)]` compiles to `#[expect(...)]` for newer versions of Rust and to `#[allow(...)]` when not supported.
+///
+/// # Example
+///
+/// ```
+/// use flexpect::flexpect;
+///
+/// #[flexpect(clippy::clone_on_copy)]  // instead of #[expect(clippy::clone_on_copy)]
+/// fn clippy_example() {
+///     let _ = 32.clone();
+/// }
+/// ```
 #[rustversion::any(before(1.43.0))]
 #[proc_macro_attribute]
 pub fn flexpect(_attr_args: TokenStream, item: TokenStream) -> TokenStream {
@@ -74,12 +116,38 @@ pub fn flexpect(_attr_args: TokenStream, item: TokenStream) -> TokenStream {
     item
 }
 
+/// `#[flexpect(...)]` compiles to `#[expect(...)]` for newer versions of Rust and to `#[allow(...)]` when not supported.
+///
+/// # Example
+///
+/// ```
+/// use flexpect::flexpect;
+///
+/// // instead of #[expect(clippy::clone_on_copy)]
+/// #[flexpect(clippy::clone_on_copy)]
+/// fn clippy_example() {
+///     let _ = 32.clone();
+/// }
+/// ```
 #[rustversion::all(since(1.43.0), before(1.81))]
 #[proc_macro_attribute]
 pub fn flexpect(attr_args: TokenStream, item: TokenStream) -> TokenStream {
     create_attr("allow", attr_args, item)
 }
 
+/// `#[flexpect(...)]` compiles to `#[expect(...)]` for newer versions of Rust and to `#[allow(...)]` when not supported.
+///
+/// # Example
+///
+/// ```
+/// use flexpect::flexpect;
+///
+/// // instead of #[expect(clippy::clone_on_copy)]
+/// #[flexpect(clippy::clone_on_copy)]
+/// fn clippy_example() {
+///     let _ = 32.clone();
+/// }
+/// ```
 #[rustversion::since(1.81)]
 #[proc_macro_attribute]
 pub fn flexpect(attr_args: TokenStream, item: TokenStream) -> TokenStream {
